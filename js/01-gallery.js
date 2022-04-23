@@ -39,11 +39,35 @@ function createModal(x) {
     const instance = basicLightbox.create(`
     <div class="modal">
 <img src="${x}"/>
+<a>Close</a>
     </div>
-`)
+`,
+    {
+        onShow: (instance) => {
+            document.addEventListener("keydown", onEscClose);
+            function onEscClose(e) {
+                if (e.code == "Escape") {
+                    instance.close();
+                document.removeEventListener("keydown", onEscClose);
+                }
+            }
+        }
+    })
 
 instance.show()
 }
 
 
 console.log(galleryItems);
+// const instance = basicLightbox.create(`
+//     <div class="modal">
+//         <p>A custom modal that has been styled independently. It's not part of basicLightbox, but perfectly shows its flexibility.</p>
+//         <input placeholder="Type something">
+//         <a>Close</a>
+//     </div>
+// `, {
+//     onShow: (instance) => {
+//         instance.element().querySelector('a').onclick = instance.close
+//     }
+// })
+// instance.show()}
