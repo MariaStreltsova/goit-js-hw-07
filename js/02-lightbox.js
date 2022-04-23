@@ -23,7 +23,7 @@ function createGalleryItemsMarkup(items) {
 
 console.log(markup)
 }
-gallery.on('show.simplelightbox')
+
 
 function onClickGalleryItems(event) {
     event.preventDefault();
