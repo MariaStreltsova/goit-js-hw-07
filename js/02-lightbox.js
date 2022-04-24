@@ -18,7 +18,6 @@ function createGalleryItemsMarkup(items) {
     alt="${description}"
     />
   </a>
-
     `}).join("");
 
 console.log(markup)
@@ -35,9 +34,5 @@ function onClickGalleryItems(event) {
         captionsData: "alt",
         captionDelay: 250,
     });
-
 }
-
-
-
 console.log(galleryItems);
