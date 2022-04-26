@@ -1,5 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
+let modalWindow;
 const galleryItemsContainer = document.querySelector(".gallery");
 const galleryItemsMarkup = createGalleryItemsMarkup(galleryItems);
 galleryItemsContainer.insertAdjacentHTML("beforeend", galleryItemsMarkup);
@@ -28,27 +29,23 @@ function onClickGalleryItems(event) {
         return;
     }
     const urlSource = event.target.dataset.source;
-    createModal(urlSource);
+    if (urlSource) {
+        modalWindow = basicLightbox.create(`
+   
+<img src="${urlSource}"/>
+`, {
+            onShow: () => galleryItemsContainer.addEventListener("keydown", onEscClose),
+            onClose: () => galleryItemsContainer.addEventListener("keydown", onEscClose),
+        });
+        modalWindow.show();
+   }
+   
 }
-function createModal(x) {
-    const instance = basicLightbox.create(`
-    <div class="modal">
-<img src="${x}"/>
-    </div>
-`,
-    {
-        onShow: (instance) => {
-            document.addEventListener("keydown", onEscClose);
-            function onEscClose(e) {
-                if (e.code == "Escape") {
-                instance.close();
-                document.removeEventListener("keydown", onEscClose);
-                }
-            }
-        }
-    })
-
-instance.show()
-}
+ function onEscClose(e) {
+        if (e.code == "Escape") 
+            modalWindow.close();
+        
+    }
 
 console.log(galleryItems);
+
