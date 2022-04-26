@@ -35,7 +35,7 @@ function onClickGalleryItems(event) {
 <img src="${urlSource}"/>
 `, {
             onShow: () => galleryItemsContainer.addEventListener("keydown", onEscClose),
-            onClose: () => galleryItemsContainer.addEventListener("keydown", onEscClose),
+            onClose: () => galleryItemsContainer.removeEventListener("keydown", onEscClose),
         });
         modalWindow.show();
    }
